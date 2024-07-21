@@ -55,7 +55,8 @@ class Day1
 
         for(int i=1; i<=pDistance; i++)
         {
-            line.add(pStart.move(pCardinalDir, pDistance));
+            Coordinates nextCoordinates = pStart.move(pCardinalDir, i);
+            line.add(nextCoordinates);
         }
 
         return line;
@@ -66,10 +67,10 @@ class Day1
         Direction.RelativeDir relativeDir = pRelDir == LEFT ?
                 Direction.RelativeDir.LEFT: Direction.RelativeDir.RIGHT;
 
+        Coordinates startCoordinates = pSituation.getCoordinates();
         pSituation.move(relativeDir, pDistance);
 
-        return makeLineOfCoords(
-                pSituation.getCoordinates(), pSituation.getOrientation(), pDistance);
+        return makeLineOfCoords(startCoordinates, pSituation.getOrientation(), pDistance);
     }
 
     private static String readPuzzleData(String pPuzzlePath)

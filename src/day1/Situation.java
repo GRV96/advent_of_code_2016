@@ -2,6 +2,8 @@ package src.day1;
 
 class Situation
 {
+    private static final String ARROW = " -> ";
+
     private Coordinates _coordinates;
     private Direction.CardinalDir _orientation;
 
@@ -9,6 +11,12 @@ class Situation
     {
         _coordinates = new Coordinates(pX, pY);
         _orientation = pOrientation;
+    }
+
+    @Override
+    public String toString()
+    {
+        return _coordinates.toString() + ARROW + _orientation;
     }
 
     public Situation(Situation pOther)
