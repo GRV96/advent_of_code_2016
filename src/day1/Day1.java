@@ -15,9 +15,9 @@ class Day1
 
         String[] instructions = inputLine.split(", *");
         Situation situation = new Situation(0, 0, Direction.CardinalDir.NORTH);
-        Situation firstPosVisitedTwice = null;
-        HashSet<Situation> positionSet = new HashSet<>();
-        positionSet.add(new Situation(situation));
+        Coordinates firstCoordsVisitedTwice = null;
+        HashSet<Coordinates> coordinateSet = new HashSet<>();
+        coordinateSet.add(new Coordinates(situation.getCoordinates()));
 
         for(String instruction: instructions)
         {
@@ -25,16 +25,16 @@ class Day1
             int distance = Integer.parseInt(instruction.substring(1));
             moveSituation(situation, relDir, distance);
 
-            Situation situationCopy = new Situation(situation);
-            if(firstPosVisitedTwice == null && !positionSet.add(situationCopy))
+            Coordinates coordinatesCopy = new Coordinates(situation.getCoordinates());
+            if(firstCoordsVisitedTwice == null && !coordinateSet.add(coordinatesCopy))
             {
-                firstPosVisitedTwice = situationCopy;
+                firstCoordsVisitedTwice = coordinatesCopy;
             }
         }
 
         int manhattanDistancePuzzle1 = situation.calculateManhattanDistance();
         int manhattanDistancePuzzle2 =
-                firstPosVisitedTwice == null ? -1 : firstPosVisitedTwice.calculateManhattanDistance();
+                firstCoordsVisitedTwice == null ? -1 : firstCoordsVisitedTwice.calculateManhattanDistance();
         System.out.println("Puzzle 1: " + manhattanDistancePuzzle1);
         System.out.println("Puzzle 2: " + manhattanDistancePuzzle2);
     }

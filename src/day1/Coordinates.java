@@ -20,12 +20,11 @@ public class Coordinates
     @Override
     public boolean equals(Object pObject)
     {
-        if(pObject == null)
+        if(!(pObject instanceof Coordinates other))
         {
             return false;
         }
 
-        Coordinates other = (Coordinates) pObject;
         return _x == other._x && _y == other._y;
     }
 
