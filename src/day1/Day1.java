@@ -2,6 +2,7 @@ package src.day1;
 
 import java.io.*;
 import java.util.HashSet;
+import java.util.Set;
 
 class Day1
 {
@@ -16,14 +17,14 @@ class Day1
         String[] instructions = inputLine.split(", *");
         Situation situation = new Situation(0, 0, Direction.CardinalDir.NORTH);
         Coordinates firstCoordsVisitedTwice = null;
-        HashSet<Coordinates> coordinateSet = new HashSet<>();
+        Set<Coordinates> coordinateSet = new HashSet<>();
         coordinateSet.add(new Coordinates(situation.getCoordinates()));
 
         for(String instruction: instructions)
         {
             char relDir = instruction.charAt(0);
             int distance = Integer.parseInt(instruction.substring(1));
-            moveSituation(situation, relDir, distance);
+            move(situation, relDir, distance);
 
             Coordinates coordinatesCopy = new Coordinates(situation.getCoordinates());
             if(firstCoordsVisitedTwice == null && !coordinateSet.add(coordinatesCopy))
@@ -35,11 +36,12 @@ class Day1
         int manhattanDistancePuzzle1 = situation.calculateManhattanDistance();
         int manhattanDistancePuzzle2 =
                 firstCoordsVisitedTwice == null ? -1 : firstCoordsVisitedTwice.calculateManhattanDistance();
+
         System.out.println("Puzzle 1: " + manhattanDistancePuzzle1);
         System.out.println("Puzzle 2: " + manhattanDistancePuzzle2);
     }
 
-    private static void moveSituation(Situation pSituation, char pRelDir, int pDistance)
+    private static void move(Situation pSituation, char pRelDir, int pDistance)
     {
         Direction.RelativeDir relativeDir = pRelDir == LEFT ?
                 Direction.RelativeDir.LEFT: Direction.RelativeDir.RIGHT;

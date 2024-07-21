@@ -2,6 +2,10 @@ package src.day1;
 
 public class Coordinates
 {
+    private static final String COMMA_SPACE = ", ";
+    private static final String PARENTHESIS_OPEN = "(";
+    private static final String PARENTHESIS_CLOSED = ")";
+
     private int _x;
     private int _y;
 
@@ -25,7 +29,23 @@ public class Coordinates
             return false;
         }
 
-        return _x == other._x && _y == other._y;
+        boolean areEqual = _x == other._x && _y == other._y;
+        return areEqual;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 87 * hash + _x;
+        hash = 97 * hash + _y;
+        return hash;
+    }
+
+    @Override
+    public String toString()
+    {
+        return PARENTHESIS_OPEN + _x + COMMA_SPACE + _y + PARENTHESIS_CLOSED;
     }
 
     public int calculateManhattanDistance()
