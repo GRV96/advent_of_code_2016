@@ -1,6 +1,7 @@
 package src.day1;
 
 import java.io.*;
+import java.util.HashSet;
 
 class Day1
 {
@@ -14,16 +15,28 @@ class Day1
 
         String[] instructions = inputLine.split(", *");
         Position position = new Position(0, 0, Direction.CardinalDir.NORTH);
+        Position firstPosVisitedTwice = null;
+        HashSet<Position> positionSet = new HashSet<>();
+        positionSet.add(new Position(position));
 
         for(String instruction: instructions)
         {
             char relDir = instruction.charAt(0);
             int distance = Integer.parseInt(instruction.substring(1));
             movePosition(position, relDir, distance);
+
+            Position positionCopy = new Position(position);
+            if(firstPosVisitedTwice == null && !positionSet.add(positionCopy))
+            {
+                firstPosVisitedTwice = positionCopy;
+            }
         }
 
-        int manhattanDistance = position.calculateManhattanDistance();
-        System.out.println("Puzzle 1: " + manhattanDistance);
+        int manhattanDistancePuzzle1 = position.calculateManhattanDistance();
+        int manhattanDistancePuzzle2 =
+                firstPosVisitedTwice == null ? -1 : firstPosVisitedTwice.calculateManhattanDistance();
+        System.out.println("Puzzle 1: " + manhattanDistancePuzzle1);
+        System.out.println("Puzzle 2: " + manhattanDistancePuzzle2);
     }
 
     private static void movePosition(Position pPosition, char pRelDir, int pDistance)

@@ -14,6 +14,25 @@ class Position
         _orientation = pOrientation;
     }
 
+    public Position(Position pOther)
+    {
+        _x = pOther._x;
+        _y = pOther._y;
+        _orientation = pOther._orientation;
+    }
+
+    @Override
+    public boolean equals(Object pObject)
+    {
+        if(pObject == null)
+        {
+            return false;
+        }
+
+        Position other = (Position) pObject;
+        return _x == other._x && _y == other._y;
+    }
+
     public int calculateManhattanDistance()
     {
         return _x + _y;
