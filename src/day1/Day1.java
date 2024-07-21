@@ -14,37 +14,37 @@ class Day1
         String inputLine = readPuzzleData(inputPath);
 
         String[] instructions = inputLine.split(", *");
-        Position position = new Position(0, 0, Direction.CardinalDir.NORTH);
-        Position firstPosVisitedTwice = null;
-        HashSet<Position> positionSet = new HashSet<>();
-        positionSet.add(new Position(position));
+        Situation situation = new Situation(0, 0, Direction.CardinalDir.NORTH);
+        Situation firstPosVisitedTwice = null;
+        HashSet<Situation> positionSet = new HashSet<>();
+        positionSet.add(new Situation(situation));
 
         for(String instruction: instructions)
         {
             char relDir = instruction.charAt(0);
             int distance = Integer.parseInt(instruction.substring(1));
-            movePosition(position, relDir, distance);
+            moveSituation(situation, relDir, distance);
 
-            Position positionCopy = new Position(position);
-            if(firstPosVisitedTwice == null && !positionSet.add(positionCopy))
+            Situation situationCopy = new Situation(situation);
+            if(firstPosVisitedTwice == null && !positionSet.add(situationCopy))
             {
-                firstPosVisitedTwice = positionCopy;
+                firstPosVisitedTwice = situationCopy;
             }
         }
 
-        int manhattanDistancePuzzle1 = position.calculateManhattanDistance();
+        int manhattanDistancePuzzle1 = situation.calculateManhattanDistance();
         int manhattanDistancePuzzle2 =
                 firstPosVisitedTwice == null ? -1 : firstPosVisitedTwice.calculateManhattanDistance();
         System.out.println("Puzzle 1: " + manhattanDistancePuzzle1);
         System.out.println("Puzzle 2: " + manhattanDistancePuzzle2);
     }
 
-    private static void movePosition(Position pPosition, char pRelDir, int pDistance)
+    private static void moveSituation(Situation pSituation, char pRelDir, int pDistance)
     {
         Direction.RelativeDir relativeDir = pRelDir == LEFT ?
                 Direction.RelativeDir.LEFT: Direction.RelativeDir.RIGHT;
 
-        pPosition.move(relativeDir, pDistance);
+        pSituation.move(relativeDir, pDistance);
     }
 
     private static String readPuzzleData(String pPuzzlePath)
@@ -52,8 +52,7 @@ class Day1
         try
         {
             BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-            String dataLine = reader.readLine();
-            return dataLine;
+            return reader.readLine();
         }
         catch (FileNotFoundException fnfe)
         {
