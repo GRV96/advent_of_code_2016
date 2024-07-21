@@ -2,8 +2,11 @@ package src.day1;
 
 import java.io.*;
 
-public class Day1
+class Day1
 {
+    private static final char LEFT = 'L';
+    private static final char RIGHT = 'R';
+
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
@@ -12,7 +15,18 @@ public class Day1
         {
             BufferedReader reader = new BufferedReader(new FileReader(inputPath));
             String inputLine = reader.readLine();
-            System.out.println(inputLine);
+
+            String[] instructions = inputLine.split(", *");
+            Position position = new Position(0, 0, Direction.CardinalDir.NORTH);
+
+            for(String instruction: instructions)
+            {
+                char relDir = instruction.charAt(0);
+                int distance = Integer.parseInt(instruction.substring(1));
+                movePosition(position, relDir, distance);
+            }
+
+            System.out.println("Puzzle 1: " + position.calculateManhattanDistance());
         }
         catch (FileNotFoundException fnfe)
         {
@@ -24,5 +38,13 @@ public class Day1
             System.err.println("An I/O error occured.");
             return;
         }
+    }
+
+    private static void movePosition(Position pPosition, char pRelDir, int pDistance)
+    {
+        Direction.RelativeDir relativeDir = pRelDir == LEFT ?
+                Direction.RelativeDir.LEFT: Direction.RelativeDir.RIGHT;
+
+        pPosition.move(relativeDir, pDistance);
     }
 }
