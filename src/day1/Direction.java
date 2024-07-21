@@ -16,11 +16,11 @@ class Direction
         RIGHT
     }
 
-    public static CardinalDir turnFromCarDir(CardinalDir pCarDir, RelativeDir pRelDir)
+    public static CardinalDir turnFromCardinalDir(CardinalDir pCardinalDir, RelativeDir pRelDir)
     {
-        CardinalDir newDirection = pCarDir;
+        CardinalDir newDirection = pCardinalDir;
 
-        switch (pCarDir)
+        switch (pCardinalDir)
         {
             case NORTH ->
             {

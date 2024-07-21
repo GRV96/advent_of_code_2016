@@ -31,7 +31,7 @@ class Position
 
     public void move(Direction.RelativeDir pRelDir, int pDistance)
     {
-        _orientation = Direction.turnFromCarDir(_orientation, pRelDir);
+        _orientation = Direction.turnFromCardinalDir(_orientation, pRelDir);
 
         switch (_orientation)
         {
