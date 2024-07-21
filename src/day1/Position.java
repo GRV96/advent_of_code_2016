@@ -29,13 +29,18 @@ class Position
             return false;
         }
 
+        /*
+         * For the purpose of knowing if
+         * a position has been visited more than once,
+         * this method ignores the orientation.
+         */
         Position other = (Position) pObject;
         return _x == other._x && _y == other._y;
     }
 
     public int calculateManhattanDistance()
     {
-        return _x + _y;
+        return Math.abs(_x) + Math.abs(_y);
     }
 
     public int getX()
