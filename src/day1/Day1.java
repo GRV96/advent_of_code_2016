@@ -10,34 +10,20 @@ class Day1
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
+        String inputLine = readPuzzleData(inputPath);
 
-        try
+        String[] instructions = inputLine.split(", *");
+        Position position = new Position(0, 0, Direction.CardinalDir.NORTH);
+
+        for(String instruction: instructions)
         {
-            BufferedReader reader = new BufferedReader(new FileReader(inputPath));
-            String inputLine = reader.readLine();
-
-            String[] instructions = inputLine.split(", *");
-            Position position = new Position(0, 0, Direction.CardinalDir.NORTH);
-
-            for(String instruction: instructions)
-            {
-                char relDir = instruction.charAt(0);
-                int distance = Integer.parseInt(instruction.substring(1));
-                movePosition(position, relDir, distance);
-            }
-
-            System.out.println("Puzzle 1: " + position.calculateManhattanDistance());
+            char relDir = instruction.charAt(0);
+            int distance = Integer.parseInt(instruction.substring(1));
+            movePosition(position, relDir, distance);
         }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + inputPath);
-            return;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occured.");
-            return;
-        }
+
+        int manhattanDistance = position.calculateManhattanDistance();
+        System.out.println("Puzzle 1: " + manhattanDistance);
     }
 
     private static void movePosition(Position pPosition, char pRelDir, int pDistance)
@@ -46,5 +32,25 @@ class Day1
                 Direction.RelativeDir.LEFT: Direction.RelativeDir.RIGHT;
 
         pPosition.move(relativeDir, pDistance);
+    }
+
+    private static String readPuzzleData(String pPuzzlePath)
+    {
+        try
+        {
+            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
+            String dataLine = reader.readLine();
+            return dataLine;
+        }
+        catch (FileNotFoundException fnfe)
+        {
+            System.err.println("File not found:\n" + pPuzzlePath);
+            return null;
+        }
+        catch (IOException ioe)
+        {
+            System.err.println("An I/O error occured.");
+            return null;
+        }
     }
 }
