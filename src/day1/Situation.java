@@ -35,13 +35,6 @@ class Situation
     public void move(Direction.RelativeDir pRelDir, int pDistance)
     {
         _orientation = Direction.turnFromCardinalDir(_orientation, pRelDir);
-
-        switch (_orientation)
-        {
-            case NORTH -> _coordinates = _coordinates.moveY(pDistance);
-            case EAST -> _coordinates = _coordinates.moveX(pDistance);
-            case SOUTH -> _coordinates = _coordinates.moveY(-pDistance);
-            case WEST -> _coordinates = _coordinates.moveX(-pDistance);
-        }
+        _coordinates = _coordinates.move(_orientation, pDistance);
     }
 }

@@ -1,7 +1,7 @@
 package src.day1;
 
 import java.io.*;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 class Day1
@@ -17,19 +17,25 @@ class Day1
         String[] instructions = inputLine.split(", *");
         Situation situation = new Situation(0, 0, Direction.CardinalDir.NORTH);
         Coordinates firstCoordsVisitedTwice = null;
-        Set<Coordinates> coordinateSet = new HashSet<>();
+        Set<Coordinates> coordinateSet = new LinkedHashSet<>();
         coordinateSet.add(new Coordinates(situation.getCoordinates()));
 
-        for(String instruction: instructions)
+        for(String instruction : instructions)
         {
             char relDir = instruction.charAt(0);
             int distance = Integer.parseInt(instruction.substring(1));
-            move(situation, relDir, distance);
+            Set<Coordinates> coordLine = move(situation, relDir, distance);
 
-            Coordinates coordinatesCopy = new Coordinates(situation.getCoordinates());
-            if(firstCoordsVisitedTwice == null && !coordinateSet.add(coordinatesCopy))
+            if(firstCoordsVisitedTwice == null)
             {
-                firstCoordsVisitedTwice = coordinatesCopy;
+                for (Coordinates coordinates : coordLine)
+                {
+                    if(!coordinateSet.add(coordinates))
+                    {
+                        firstCoordsVisitedTwice = coordinates;
+                        break;
+                    }
+                }
             }
         }
 
@@ -41,12 +47,29 @@ class Day1
         System.out.println("Puzzle 2: " + manhattanDistancePuzzle2);
     }
 
-    private static void move(Situation pSituation, char pRelDir, int pDistance)
+    private static Set<Coordinates> makeLineOfCoords(
+            Coordinates pStart, Direction.CardinalDir pCardinalDir, int pDistance)
+    {
+        // The set will not include pStart.
+        Set<Coordinates> line = new LinkedHashSet<>();
+
+        for(int i=1; i<=pDistance; i++)
+        {
+            line.add(pStart.move(pCardinalDir, pDistance));
+        }
+
+        return line;
+    }
+
+    private static Set<Coordinates> move(Situation pSituation, char pRelDir, int pDistance)
     {
         Direction.RelativeDir relativeDir = pRelDir == LEFT ?
                 Direction.RelativeDir.LEFT: Direction.RelativeDir.RIGHT;
 
         pSituation.move(relativeDir, pDistance);
+
+        return makeLineOfCoords(
+                pSituation.getCoordinates(), pSituation.getOrientation(), pDistance);
     }
 
     private static String readPuzzleData(String pPuzzlePath)

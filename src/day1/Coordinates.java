@@ -68,6 +68,18 @@ public class Coordinates
         return new Coordinates(_x + pDeltaX, _y + pDeltaY);
     }
 
+    public Coordinates move(Direction.CardinalDir pCardinalDir, int pDistance)
+    {
+        return
+                switch (pCardinalDir)
+                {
+                    case NORTH -> moveY(pDistance);
+                    case EAST -> moveX(pDistance);
+                    case SOUTH -> moveY(-pDistance);
+                    case WEST -> moveX(-pDistance);
+                };
+    }
+
     public Coordinates moveX(int pDeltaX)
     {
         return new Coordinates(_x + pDeltaX, _y);
