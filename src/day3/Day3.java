@@ -13,7 +13,7 @@ public class Day3
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        List<String> inputLines = PuzzleReading.readPuzzleLines(inputPath);
+        List<String> inputLines = PuzzleReading.readFileLines(inputPath);
 
         // i: column index
         // j: position in the specification

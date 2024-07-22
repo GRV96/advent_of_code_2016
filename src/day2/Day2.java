@@ -1,10 +1,7 @@
 package src.day2;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import src.reading.PuzzleReading;
+
 import java.util.List;
 
 public class Day2
@@ -17,7 +14,7 @@ public class Day2
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        List<String> instructionLines = readPuzzleData(inputPath);
+        List<String> instructionLines = PuzzleReading.readFileLines(inputPath);
         int nbInstructionLines = instructionLines.size();
 
         AKeypad keypadPuzzle1 = new SquareKeypad();
@@ -65,35 +62,5 @@ public class Day2
 
         System.out.println("Puzzle 1: " + accessCodePuzzle1);
         System.out.println("Puzzle 2: " + accessCodePuzzle2);
-    }
-
-    private static List<String> readPuzzleData(String pPuzzlePath)
-    {
-        try
-        {
-            List<String> inputLines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null)
-            {
-                if (inputLine.length() > 0)
-                {
-                    inputLines.add(inputLine);
-                }
-            }
-
-            return inputLines;
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + pPuzzlePath);
-            return null;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occurred.");
-            return null;
-        }
     }
 }

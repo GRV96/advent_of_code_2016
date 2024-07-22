@@ -46,7 +46,7 @@ public class PuzzleReading
         }
     }
 
-    public static List<String> readPuzzleLines(String pPuzzlePath)
+    public static List<String> readFileLines(String pPuzzlePath)
     {
         try
         {
