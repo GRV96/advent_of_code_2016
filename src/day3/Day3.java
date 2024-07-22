@@ -19,8 +19,10 @@ public class Day3
 
         int nbTrianglesPuzzle1 = 0;
         int nbTrianglesPuzzle2 = 0;
+
         LineReader lineReader = new LineReader(inputPath);
         String inputLine;
+
         while ((inputLine = lineReader.readLine()) != null)
         {
             int[] sideSpecPuzzle1 = makeSideSpecs(inputLine);
