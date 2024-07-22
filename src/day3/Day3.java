@@ -16,11 +16,12 @@ public class Day3
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        List<int[]> sideSpecs = readPuzzleData(inputPath, Day3::makeSideSpecs);
+        List<String> inputLines = readPuzzleLines(inputPath);
 
         int nbTriangles = 0;
-        for (int[] sideSpec : sideSpecs)
+        for (String inputLine : inputLines)
         {
+            int[] sideSpec = makeSideSpecs(inputLine);
             if (isSideSpecTriangle(sideSpec))
             {
                 nbTriangles++;
@@ -69,7 +70,8 @@ public class Day3
         return sideSpecs;
     }
 
-    private static <R> List<R> readPuzzleData(String pPuzzlePath, Function<String, R> pFunction)
+    private static <R> List<R> readPuzzleData(
+            String pPuzzlePath, Function<String, R> pFunction)
     {
         try
         {
@@ -88,6 +90,37 @@ public class Day3
             }
 
             return data;
+        }
+        catch (FileNotFoundException fnfe)
+        {
+            System.err.println("File not found:\n" + pPuzzlePath);
+            return null;
+        }
+        catch (IOException ioe)
+        {
+            System.err.println("An I/O error occurred.");
+            return null;
+        }
+    }
+
+    private static List<String> readPuzzleLines(String pPuzzlePath)
+    {
+        try
+        {
+            List<String> puzzleLines = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
+
+            String inputLine;
+            while ((inputLine = reader.readLine()) != null)
+            {
+                if (inputLine.length() > 0)
+                {
+                    inputLine = inputLine.trim();
+                    puzzleLines.add(inputLine);
+                }
+            }
+
+            return puzzleLines;
         }
         catch (FileNotFoundException fnfe)
         {
