@@ -92,7 +92,7 @@ public class Day2
         }
         catch (IOException ioe)
         {
-            System.err.println("An I/O error occured.");
+            System.err.println("An I/O error occurred.");
             return null;
         }
     }
