@@ -40,7 +40,7 @@ public class Day2
                 }
             }
 
-            int digit = keypad.getKey();
+            char digit = keypad.getKey();
             accessCode += digit;
         }
 

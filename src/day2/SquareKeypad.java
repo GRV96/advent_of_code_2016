@@ -6,14 +6,14 @@ public class SquareKeypad extends AKeypad
 
     // i: rows, up to bottom
     // j: columns, left to right
-    private static final int[][] KEYS = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    private static final char[][] KEYS = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
 
     public SquareKeypad()
     {
         super();
     }
 
-    public int getKey()
+    public char getKey()
     {
         return KEYS[_rowIndex][_columnIndex];
     }
