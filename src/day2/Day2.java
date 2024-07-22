@@ -20,7 +20,7 @@ public class Day2
         List<String> inputLines = readPuzzleData(inputPath);
         int nbInputLines = inputLines.size();
 
-        Keypad keypad = new Keypad();
+        SquareKeypad keypad = new SquareKeypad();
         String accessCode = "";
 
         for (int i=0; i<nbInputLines; i++)
@@ -45,6 +45,7 @@ public class Day2
         }
 
         System.out.println("Puzzle 1: " + accessCode);
+        System.out.println("Puzzle 2: " + -1);
     }
 
     private static List<String> readPuzzleData(String pPuzzlePath)
