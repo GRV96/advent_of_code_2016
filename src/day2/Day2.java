@@ -1,8 +1,6 @@
 package src.day2;
 
-import src.reading.PuzzleReading;
-
-import java.util.List;
+import src.reading.LineReader;
 
 public class Day2
 {
@@ -14,8 +12,6 @@ public class Day2
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        List<String> instructionLines = PuzzleReading.readFileLines(inputPath);
-        int nbInstructionLines = instructionLines.size();
 
         AKeypad keypadPuzzle1 = new SquareKeypad();
         String accessCodePuzzle1 = "";
@@ -23,11 +19,11 @@ public class Day2
         AKeypad keypadPuzzle2 = new DiamondKeypad();
         String accessCodePuzzle2 = "";
 
-        for (int i=0; i<nbInstructionLines; i++)
+        LineReader lineReader = new LineReader(inputPath);
+        String instructionLine;
+        while ((instructionLine = lineReader.readLine()) != null)
         {
-            String instructionLine = instructionLines.get(i);
             int nbInstructions = instructionLine.length();
-
             for (int j=0; j<nbInstructions; j++)
             {
                 char instruction = instructionLine.charAt(j);
@@ -59,6 +55,7 @@ public class Day2
             accessCodePuzzle1 += keypadPuzzle1.getKey();
             accessCodePuzzle2 += keypadPuzzle2.getKey();
         }
+        lineReader.close();
 
         System.out.println("Puzzle 1: " + accessCodePuzzle1);
         System.out.println("Puzzle 2: " + accessCodePuzzle2);

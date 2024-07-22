@@ -1,8 +1,6 @@
 package src.day3;
 
-import src.reading.PuzzleReading;
-
-import java.util.List;
+import src.reading.LineReader;
 
 public class Day3
 {
@@ -13,7 +11,6 @@ public class Day3
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        List<String> inputLines = PuzzleReading.readFileLines(inputPath);
 
         // i: column index
         // j: position in the specification
@@ -22,7 +19,9 @@ public class Day3
 
         int nbTrianglesPuzzle1 = 0;
         int nbTrianglesPuzzle2 = 0;
-        for (String inputLine : inputLines)
+        LineReader lineReader = new LineReader(inputPath);
+        String inputLine;
+        while ((inputLine = lineReader.readLine()) != null)
         {
             int[] sideSpecPuzzle1 = makeSideSpecs(inputLine);
             if (isSideSpecTriangle(sideSpecPuzzle1))
@@ -49,6 +48,7 @@ public class Day3
                 }
             }
         }
+        lineReader.close();
 
         System.out.println("Puzzle 1: " + nbTrianglesPuzzle1);
         System.out.println("Puzzle 2: " + nbTrianglesPuzzle2);
