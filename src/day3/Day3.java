@@ -10,7 +10,8 @@ import java.util.function.Function;
 
 public class Day3
 {
-    public static final int NB_SIDES = 3;
+    private static final int NB_COLUMNS = 3;
+    private static final int NB_SIDES = 3;
     private static final String NUMBER_SEPARATOR = " +";
 
     public static void main(String[] pArgs)
@@ -18,17 +19,43 @@ public class Day3
         String inputPath = pArgs[0];
         List<String> inputLines = readPuzzleLines(inputPath);
 
-        int nbTriangles = 0;
+        // i: column index
+        // j: position in the specification
+        int[][] sideSpecsPuzzle2 = new int[NB_COLUMNS][NB_SIDES];
+        int jPuzzle2 = 0;
+
+        int nbTrianglesPuzzle1 = 0;
+        int nbTrianglesPuzzle2 = 0;
         for (String inputLine : inputLines)
         {
-            int[] sideSpec = makeSideSpecs(inputLine);
-            if (isSideSpecTriangle(sideSpec))
+            int[] sideSpecPuzzle1 = makeSideSpecs(inputLine);
+            if (isSideSpecTriangle(sideSpecPuzzle1))
             {
-                nbTriangles++;
+                nbTrianglesPuzzle1++;
+            }
+
+            for (int i=0; i<NB_COLUMNS; i++)
+            {
+                sideSpecsPuzzle2[i][jPuzzle2] = sideSpecPuzzle1[i];
+            }
+
+            jPuzzle2++;
+            if (jPuzzle2 >= NB_SIDES)
+            {
+                jPuzzle2 = 0;
+
+                for (int i=0; i<NB_COLUMNS; i++)
+                {
+                    if (isSideSpecTriangle(sideSpecsPuzzle2[i]))
+                    {
+                        nbTrianglesPuzzle2++;
+                    }
+                }
             }
         }
 
-        System.out.println("Puzzle 1: " + nbTriangles);
+        System.out.println("Puzzle 1: " + nbTrianglesPuzzle1);
+        System.out.println("Puzzle 2: " + nbTrianglesPuzzle2);
     }
 
     private static boolean isSideSpecTriangle(int[] pSideSpec)
