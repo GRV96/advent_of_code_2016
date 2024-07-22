@@ -4,32 +4,66 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Day2
 {
+    private static final char UP = 'U';
+    private static final char DOWN = 'D';
+    private static final char LEFT = 'L';
+    private static final char RIGHT = 'R';
+
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        String input = readPuzzleData(inputPath);
-        System.out.println("Hello, world!");
+        List<String> inputLines = readPuzzleData(inputPath);
+        int nbInputLines = inputLines.size();
+
+        Keypad keypad = new Keypad();
+        String accessCode = "";
+
+        for (int i=0; i<nbInputLines; i++)
+        {
+            String inputLine = inputLines.get(i);
+            int nbInstructions = inputLine.length();
+
+            for (int j=0; j<nbInstructions; j++)
+            {
+                char instruction = inputLine.charAt(j);
+                switch (instruction)
+                {
+                    case UP -> keypad.moveRowIndex(-1);
+                    case DOWN -> keypad.moveRowIndex(1);
+                    case LEFT -> keypad.moveColumnIndex(-1);
+                    case RIGHT -> keypad.moveColumnIndex(1);
+                }
+            }
+
+            int digit = keypad.getKey();
+            accessCode += digit;
+        }
+
+        System.out.println("Puzzle 1: " + accessCode);
     }
 
-    private static String readPuzzleData(String pPuzzlePath)
+    private static List<String> readPuzzleData(String pPuzzlePath)
     {
         try
         {
-            String completeInput = "";
+            List<String> inputLines = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
 
             String inputLine;
-            do
+            while ((inputLine = reader.readLine()) != null)
             {
-                inputLine = reader.readLine();
-                completeInput += inputLine;
+                if (inputLine.length() > 0)
+                {
+                    inputLines.add(inputLine);
+                }
             }
-            while (inputLine != null);
 
-            return completeInput;
+            return inputLines;
         }
         catch (FileNotFoundException fnfe)
         {
