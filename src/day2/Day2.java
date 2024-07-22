@@ -17,35 +17,54 @@ public class Day2
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        List<String> inputLines = readPuzzleData(inputPath);
-        int nbInputLines = inputLines.size();
+        List<String> instructionLines = readPuzzleData(inputPath);
+        int nbInstructionLines = instructionLines.size();
 
-        SquareKeypad keypad = new SquareKeypad();
-        String accessCode = "";
+        AKeypad keypadPuzzle1 = new SquareKeypad();
+        String accessCodePuzzle1 = "";
 
-        for (int i=0; i<nbInputLines; i++)
+        AKeypad keypadPuzzle2 = new DiamondKeypad();
+        String accessCodePuzzle2 = "";
+
+        for (int i=0; i<nbInstructionLines; i++)
         {
-            String inputLine = inputLines.get(i);
-            int nbInstructions = inputLine.length();
+            String instructionLine = instructionLines.get(i);
+            int nbInstructions = instructionLine.length();
 
             for (int j=0; j<nbInstructions; j++)
             {
-                char instruction = inputLine.charAt(j);
+                char instruction = instructionLine.charAt(j);
                 switch (instruction)
                 {
-                    case UP -> keypad.moveRowIndex(-1);
-                    case DOWN -> keypad.moveRowIndex(1);
-                    case LEFT -> keypad.moveColumnIndex(-1);
-                    case RIGHT -> keypad.moveColumnIndex(1);
+                    case UP ->
+                    {
+                        keypadPuzzle1.moveRowIndex(-1);
+                        keypadPuzzle2.moveRowIndex(-1);
+                    }
+                    case DOWN ->
+                    {
+                        keypadPuzzle1.moveRowIndex(1);
+                        keypadPuzzle2.moveRowIndex(1);
+                    }
+                    case LEFT ->
+                    {
+                        keypadPuzzle1.moveColumnIndex(-1);
+                        keypadPuzzle2.moveColumnIndex(-1);
+                    }
+                    case RIGHT ->
+                    {
+                        keypadPuzzle1.moveColumnIndex(1);
+                        keypadPuzzle2.moveColumnIndex(1);
+                    }
                 }
             }
 
-            char digit = keypad.getKey();
-            accessCode += digit;
+            accessCodePuzzle1 += keypadPuzzle1.getKey();
+            accessCodePuzzle2 += keypadPuzzle2.getKey();
         }
 
-        System.out.println("Puzzle 1: " + accessCode);
-        System.out.println("Puzzle 2: " + -1);
+        System.out.println("Puzzle 1: " + accessCodePuzzle1);
+        System.out.println("Puzzle 2: " + accessCodePuzzle2);
     }
 
     private static List<String> readPuzzleData(String pPuzzlePath)

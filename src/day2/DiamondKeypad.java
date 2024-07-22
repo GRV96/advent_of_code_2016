@@ -7,11 +7,11 @@ public class DiamondKeypad extends AKeypad
     public DiamondKeypad()
     {
         super();
-        _upperIndexBound = 5;
+        _upperIndexBound = 4;
         _keys = new char[][]
                 {{'\0', '\0', '1', '\0', '\0'},
                 {'\0', '2', '3', '4', '\0'},
-                {'5', '6', '7', '7', '9'},
+                {'5', '6', '7', '8', '9'},
                 {'\0', 'A', 'B', 'C', '\0'},
                 {'\0', '\0', 'D', '\0', '\0'}};
     }
@@ -26,8 +26,8 @@ public class DiamondKeypad extends AKeypad
     @Override
     protected boolean isRowIndexWithinBounds(int pRowIndex)
     {
-        return isIndexWithinBounds(pRowIndex) &&
-                _keys[pRowIndex][_columnIndex] != NULL_CHAR;
+        return isIndexWithinBounds(pRowIndex)
+                && _keys[pRowIndex][_columnIndex] != NULL_CHAR;
     }
 
     @Override
