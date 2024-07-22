@@ -2,6 +2,11 @@ package src.day2;
 
 public abstract class AKeypad
 {
+    // i: rows, up to bottom
+    // j: columns, left to right
+    protected char[][] _keys;
+
+    protected int _upperIndexBound;
     protected int _rowIndex;
     protected int _columnIndex;
 
@@ -11,6 +16,16 @@ public abstract class AKeypad
     protected AKeypad()
     {
         resetPosition();
+    }
+
+    public char getKey()
+    {
+        return _keys[_rowIndex][_columnIndex];
+    }
+
+    protected boolean isIndexWithinBounds(int pIndex)
+    {
+        return pIndex >= 0 && pIndex <= _upperIndexBound;
     }
 
     public boolean moveColumnIndex(int pDelta)

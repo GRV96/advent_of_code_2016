@@ -2,31 +2,17 @@ package src.day2;
 
 public class SquareKeypad extends AKeypad
 {
-    private static final int UPPER_INDEX_BOUND = 2;
-
-    // i: rows, up to bottom
-    // j: columns, left to right
-    private static final char[][] KEYS = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
-
     public SquareKeypad()
     {
         super();
-    }
-
-    public char getKey()
-    {
-        return KEYS[_rowIndex][_columnIndex];
+        _upperIndexBound = 2;
+        _keys = new char[][]{{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
     }
 
     @Override
     protected boolean isColumnIndexWithinBounds(int pColumnIndex)
     {
         return isIndexWithinBounds(pColumnIndex);
-    }
-
-    private static boolean isIndexWithinBounds(int pRowIndex)
-    {
-        return pRowIndex >= 0 && pRowIndex <= UPPER_INDEX_BOUND;
     }
 
     @Override
