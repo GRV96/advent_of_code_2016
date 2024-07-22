@@ -21,13 +21,14 @@ public class PuzzleReading
             List<R> data = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
 
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null)
+            String puzzleLine;
+            while ((puzzleLine = reader.readLine()) != null)
             {
-                if (inputLine.length() > 0)
+                puzzleLine = puzzleLine.trim();
+
+                if (puzzleLine.length() > 0)
                 {
-                    inputLine = inputLine.trim();
-                    R dataItem = pFunction.apply(inputLine);
+                    R dataItem = pFunction.apply(puzzleLine);
                     data.add(dataItem);
                 }
             }
@@ -46,12 +47,12 @@ public class PuzzleReading
         }
     }
 
-    public static List<String> readFileLines(String pPuzzlePath)
+    public static List<String> readFileLines(String pInputPath)
     {
         try
         {
-            List<String> puzzleLines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
+            List<String> inputLines = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(pInputPath));
 
             String inputLine;
             while ((inputLine = reader.readLine()) != null)
@@ -59,15 +60,15 @@ public class PuzzleReading
                 if (inputLine.length() > 0)
                 {
                     inputLine = inputLine.trim();
-                    puzzleLines.add(inputLine);
+                    inputLines.add(inputLine);
                 }
             }
 
-            return puzzleLines;
+            return inputLines;
         }
         catch (FileNotFoundException fnfe)
         {
-            System.err.println(FILE_NOT_FOUND + pPuzzlePath);
+            System.err.println(FILE_NOT_FOUND + pInputPath);
             return null;
         }
         catch (IOException ioe)

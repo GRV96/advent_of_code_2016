@@ -20,9 +20,12 @@ public class LineReader
     {
         try
         {
-            _reader.close();
+            if (_reader != null)
+            {
+                _reader.close();
+            }
         }
-        catch (IOException | NullPointerException e)
+        catch (IOException e)
         {
             // Nothing to do
         }
