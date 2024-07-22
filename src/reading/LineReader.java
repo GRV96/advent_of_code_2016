@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class LineReader
 {
-    private String _filePath;
+    private final String _filePath;
     private BufferedReader _reader;
 
     public LineReader(String pFilePath)
@@ -30,8 +30,12 @@ public class LineReader
 
     public String readLine()
     {
-        String line = null;
+        if (_reader == null)
+        {
+            return null;
+        }
 
+        String line = null;
         try
         {
             line = _reader.readLine();
@@ -41,7 +45,7 @@ public class LineReader
                 line = line.trim();
             }
         }
-        catch (IOException | NullPointerException e)
+        catch (IOException ioe)
         {
             // Do nothing.
         }
