@@ -57,9 +57,10 @@ public class PuzzleReading
             String inputLine;
             while ((inputLine = reader.readLine()) != null)
             {
+                inputLine = inputLine.trim();
+
                 if (inputLine.length() > 0)
                 {
-                    inputLine = inputLine.trim();
                     inputLines.add(inputLine);
                 }
             }
