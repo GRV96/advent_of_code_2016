@@ -1,12 +1,8 @@
 package src.day3;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import src.reading.PuzzleReading;
+
 import java.util.List;
-import java.util.function.Function;
 
 public class Day3
 {
@@ -17,7 +13,7 @@ public class Day3
     public static void main(String[] pArgs)
     {
         String inputPath = pArgs[0];
-        List<String> inputLines = readPuzzleLines(inputPath);
+        List<String> inputLines = PuzzleReading.readPuzzleLines(inputPath);
 
         // i: column index
         // j: position in the specification
@@ -95,69 +91,5 @@ public class Day3
         }
 
         return sideSpecs;
-    }
-
-    private static <R> List<R> readPuzzleData(
-            String pPuzzlePath, Function<String, R> pFunction)
-    {
-        try
-        {
-            List<R> data = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null)
-            {
-                if (inputLine.length() > 0)
-                {
-                    inputLine = inputLine.trim();
-                    R dataItem = pFunction.apply(inputLine);
-                    data.add(dataItem);
-                }
-            }
-
-            return data;
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + pPuzzlePath);
-            return null;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occurred.");
-            return null;
-        }
-    }
-
-    private static List<String> readPuzzleLines(String pPuzzlePath)
-    {
-        try
-        {
-            List<String> puzzleLines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null)
-            {
-                if (inputLine.length() > 0)
-                {
-                    inputLine = inputLine.trim();
-                    puzzleLines.add(inputLine);
-                }
-            }
-
-            return puzzleLines;
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + pPuzzlePath);
-            return null;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occurred.");
-            return null;
-        }
     }
 }
