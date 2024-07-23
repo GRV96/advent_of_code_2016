@@ -1,5 +1,7 @@
 package src.day4;
 
+import src.day4.char_count.CharacterCounter;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,7 +27,7 @@ public class Day4
                 charCounter.registerCharacter(currentChar);
             }
         }
-        char[] descFreqSortedChars = charCounter.sortCharsByDescCount();
+        char[] descFreqSortedChars = charCounter.getCharsSortedByDescCount();
 
         String generatedChecksum
                 = new String(descFreqSortedChars).substring(0, CHECKSUM_LENGTH);
