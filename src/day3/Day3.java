@@ -1,12 +1,8 @@
 package src.day3;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import src.reading.LineReader;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
 
 public class Day3
 {
@@ -14,10 +10,9 @@ public class Day3
     private static final int NB_SIDES = 3;
     private static final String NUMBER_SEPARATOR = " +";
 
-    public static void main(String[] pArgs)
+    public static void main(String[] pArgs) throws IOException
     {
         String inputPath = pArgs[0];
-        List<String> inputLines = readPuzzleLines(inputPath);
 
         // i: column index
         // j: position in the specification
@@ -26,7 +21,11 @@ public class Day3
 
         int nbTrianglesPuzzle1 = 0;
         int nbTrianglesPuzzle2 = 0;
-        for (String inputLine : inputLines)
+
+        LineReader lineReader = new LineReader(inputPath);
+        String inputLine;
+
+        while ((inputLine = lineReader.readLine()) != null)
         {
             int[] sideSpecPuzzle1 = makeSideSpecs(inputLine);
             if (isSideSpecTriangle(sideSpecPuzzle1))
@@ -53,6 +52,7 @@ public class Day3
                 }
             }
         }
+        lineReader.close();
 
         System.out.println("Puzzle 1: " + nbTrianglesPuzzle1);
         System.out.println("Puzzle 2: " + nbTrianglesPuzzle2);
@@ -95,69 +95,5 @@ public class Day3
         }
 
         return sideSpecs;
-    }
-
-    private static <R> List<R> readPuzzleData(
-            String pPuzzlePath, Function<String, R> pFunction)
-    {
-        try
-        {
-            List<R> data = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null)
-            {
-                if (inputLine.length() > 0)
-                {
-                    inputLine = inputLine.trim();
-                    R dataItem = pFunction.apply(inputLine);
-                    data.add(dataItem);
-                }
-            }
-
-            return data;
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + pPuzzlePath);
-            return null;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occurred.");
-            return null;
-        }
-    }
-
-    private static List<String> readPuzzleLines(String pPuzzlePath)
-    {
-        try
-        {
-            List<String> puzzleLines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null)
-            {
-                if (inputLine.length() > 0)
-                {
-                    inputLine = inputLine.trim();
-                    puzzleLines.add(inputLine);
-                }
-            }
-
-            return puzzleLines;
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + pPuzzlePath);
-            return null;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occurred.");
-            return null;
-        }
     }
 }

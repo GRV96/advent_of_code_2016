@@ -1,18 +1,19 @@
 package src.day1;
 
-import java.io.*;
+import src.reading.PuzzleReading;
+
+import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 class Day1
 {
     private static final char LEFT = 'L';
-    private static final char RIGHT = 'R';
 
-    public static void main(String[] pArgs)
+    public static void main(String[] pArgs) throws IOException
     {
         String inputPath = pArgs[0];
-        String inputLine = readPuzzleData(inputPath);
+        String inputLine = PuzzleReading.readFileLines(inputPath).getFirst();
 
         String[] instructions = inputLine.split(", *");
         Situation situation = new Situation(0, 0, Direction.CardinalDir.NORTH);
@@ -71,24 +72,5 @@ class Day1
         pSituation.move(relativeDir, pDistance);
 
         return makeLineOfCoords(startCoordinates, pSituation.getOrientation(), pDistance);
-    }
-
-    private static String readPuzzleData(String pPuzzlePath)
-    {
-        try
-        {
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-            return reader.readLine();
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + pPuzzlePath);
-            return null;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occurred.");
-            return null;
-        }
     }
 }

@@ -1,11 +1,8 @@
 package src.day2;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import src.reading.LineReader;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Day2
 {
@@ -14,11 +11,9 @@ public class Day2
     private static final char LEFT = 'L';
     private static final char RIGHT = 'R';
 
-    public static void main(String[] pArgs)
+    public static void main(String[] pArgs) throws IOException
     {
         String inputPath = pArgs[0];
-        List<String> instructionLines = readPuzzleData(inputPath);
-        int nbInstructionLines = instructionLines.size();
 
         AKeypad keypadPuzzle1 = new SquareKeypad();
         String accessCodePuzzle1 = "";
@@ -26,11 +21,11 @@ public class Day2
         AKeypad keypadPuzzle2 = new DiamondKeypad();
         String accessCodePuzzle2 = "";
 
-        for (int i=0; i<nbInstructionLines; i++)
+        LineReader lineReader = new LineReader(inputPath);
+        String instructionLine;
+        while ((instructionLine = lineReader.readLine()) != null)
         {
-            String instructionLine = instructionLines.get(i);
             int nbInstructions = instructionLine.length();
-
             for (int j=0; j<nbInstructions; j++)
             {
                 char instruction = instructionLine.charAt(j);
@@ -62,38 +57,9 @@ public class Day2
             accessCodePuzzle1 += keypadPuzzle1.getKey();
             accessCodePuzzle2 += keypadPuzzle2.getKey();
         }
+        lineReader.close();
 
         System.out.println("Puzzle 1: " + accessCodePuzzle1);
         System.out.println("Puzzle 2: " + accessCodePuzzle2);
-    }
-
-    private static List<String> readPuzzleData(String pPuzzlePath)
-    {
-        try
-        {
-            List<String> inputLines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(pPuzzlePath));
-
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null)
-            {
-                if (inputLine.length() > 0)
-                {
-                    inputLines.add(inputLine);
-                }
-            }
-
-            return inputLines;
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.err.println("File not found:\n" + pPuzzlePath);
-            return null;
-        }
-        catch (IOException ioe)
-        {
-            System.err.println("An I/O error occurred.");
-            return null;
-        }
     }
 }
