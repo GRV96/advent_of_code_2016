@@ -29,18 +29,16 @@ public class CharacterCounter
     {
         int sortedCharsIndex = 0;
         char[] sortedCharacters = new char[_characterCounts.size()];
+        Set<Character> keys = _characterCounts.keySet();
 
-        Map<Character, Integer> contentCopy = new HashMap<>(_characterCounts);
-
-        while (!contentCopy.isEmpty())
+        while (!keys.isEmpty())
         {
-            Set<Character> keys = contentCopy.keySet();
             int maxOccurrenceCount = Integer.MIN_VALUE;
             Character mostFrequentChar = '\0';
 
             for (Character character : keys)
             {
-                int occurrenceCount = contentCopy.get(character);
+                int occurrenceCount = _characterCounts.get(character);
 
                 if (occurrenceCount > maxOccurrenceCount)
                 {
@@ -51,7 +49,7 @@ public class CharacterCounter
 
             sortedCharacters[sortedCharsIndex] = mostFrequentChar;
             sortedCharsIndex++;
-            contentCopy.remove(mostFrequentChar);
+            keys.remove(mostFrequentChar);
         }
 
         return sortedCharacters;
