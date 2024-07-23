@@ -2,6 +2,8 @@ package src.day2;
 
 import src.reading.LineReader;
 
+import java.io.IOException;
+
 public class Day2
 {
     private static final char UP = 'U';
@@ -9,7 +11,7 @@ public class Day2
     private static final char LEFT = 'L';
     private static final char RIGHT = 'R';
 
-    public static void main(String[] pArgs)
+    public static void main(String[] pArgs) throws IOException
     {
         String inputPath = pArgs[0];
 

@@ -2,15 +2,15 @@ package src.day1;
 
 import src.reading.PuzzleReading;
 
+import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 class Day1
 {
     private static final char LEFT = 'L';
-    private static final char RIGHT = 'R';
 
-    public static void main(String[] pArgs)
+    public static void main(String[] pArgs) throws IOException
     {
         String inputPath = pArgs[0];
         String inputLine = PuzzleReading.readFileLines(inputPath).getFirst();

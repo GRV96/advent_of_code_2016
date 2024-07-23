@@ -2,13 +2,15 @@ package src.day3;
 
 import src.reading.LineReader;
 
+import java.io.IOException;
+
 public class Day3
 {
     private static final int NB_COLUMNS = 3;
     private static final int NB_SIDES = 3;
     private static final String NUMBER_SEPARATOR = " +";
 
-    public static void main(String[] pArgs)
+    public static void main(String[] pArgs) throws IOException
     {
         String inputPath = pArgs[0];
 

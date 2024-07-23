@@ -10,61 +10,39 @@ public class LineReader
     private final String _filePath;
     private BufferedReader _reader;
 
-    public LineReader(String pFilePath)
+    public LineReader(String pFilePath) throws FileNotFoundException
     {
         _filePath = pFilePath;
         reset();
     }
 
-    public void close()
+    public void close() throws IOException
     {
-        try
+        if (_reader != null)
         {
-            if (_reader != null)
-            {
-                _reader.close();
-            }
-        }
-        catch (IOException e)
-        {
-            // Nothing to do
+            _reader.close();
         }
     }
 
-    public String readLine()
+    public String readLine() throws IOException
     {
         if (_reader == null)
         {
             return null;
         }
 
-        String line = null;
-        try
-        {
-            line = _reader.readLine();
+        String line = _reader.readLine();
 
-            if(line != null)
-            {
-                line = line.trim();
-            }
-        }
-        catch (IOException ioe)
+        if(line != null)
         {
-            // Do nothing.
+            line = line.trim();
         }
 
         return line;
     }
 
-    public void reset()
+    public void reset() throws FileNotFoundException
     {
-        try
-        {
-            _reader = new BufferedReader(new FileReader(_filePath));
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            // The reader stays null.
-        }
+        _reader = new BufferedReader(new FileReader(_filePath));
     }
 }
