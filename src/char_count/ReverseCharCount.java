@@ -1,4 +1,4 @@
-package src.day4.char_count;
+package src.char_count;
 
 import java.util.Comparator;
 import java.util.ArrayList;
@@ -12,9 +12,12 @@ class ReverseCharCount
 {
     Map<Integer, Set<Character>> _countsToChar;
 
-    public ReverseCharCount(Map<Character, Integer> pCharacterCounts)
+    public ReverseCharCount(
+            Map<Character, Integer> pCharacterCounts,
+            Comparator<Integer> pCharCountComparator,
+            Comparator<Character> pCharComparator)
     {
-        initializeContent(pCharacterCounts);
+        initializeContent(pCharacterCounts, pCharCountComparator, pCharComparator);
     }
 
     public List<Character> getCharsSortedByDescCount()
@@ -29,11 +32,14 @@ class ReverseCharCount
         return sortedCharacters;
     }
 
-    private void initializeContent(Map<Character, Integer> pCharacterCounts)
+    private void initializeContent(
+            Map<Character, Integer> pCharacterCounts,
+            Comparator<Integer> pCharCountComparator,
+            Comparator<Character> pCharComparator)
     {
         if (_countsToChar == null)
         {
-            _countsToChar = new TreeMap<>(Comparator.reverseOrder());
+            _countsToChar = new TreeMap<>(pCharCountComparator);
         }
         else
         {
@@ -44,7 +50,7 @@ class ReverseCharCount
         {
             int nbOccurrences = pCharacterCounts.get(someChar);
             Set<Character> charsOfSameFrequency = _countsToChar.computeIfAbsent(
-                    nbOccurrences, _ -> new TreeSet<>());
+                    nbOccurrences, _ -> new TreeSet<>(pCharComparator));
 
             charsOfSameFrequency.add(someChar);
         }

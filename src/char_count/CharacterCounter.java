@@ -1,5 +1,6 @@
-package src.day4.char_count;
+package src.char_count;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,15 @@ public class CharacterCounter
         _characterCounts.put(pSomeCharacter, nbOccurrences + 1);
     }
 
-    public char[] getCharsSortedByDescCount()
+    public char[] sortCharactersByCount(boolean pCountAscOrder, boolean pCharSameCountAscOrder)
     {
-        ReverseCharCount rcc = new ReverseCharCount(_characterCounts);
+        Comparator<Integer> charCountComparator
+                = pCountAscOrder ? Comparator.naturalOrder() : Comparator.reverseOrder();
+        Comparator<Character> charComparator
+                = pCharSameCountAscOrder ? Comparator.naturalOrder() : Comparator.reverseOrder();
+
+        ReverseCharCount rcc = new ReverseCharCount(
+                _characterCounts, charCountComparator, charComparator);
         List<Character> sortedCharacters = rcc.getCharsSortedByDescCount();
         int nbCharacters = sortedCharacters.size();
         char[] retVal = new char[nbCharacters];
