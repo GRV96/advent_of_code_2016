@@ -53,8 +53,8 @@ public class Day6
         int messageIndex = 0;
         for (CharacterCounter charCounter : characterCounters)
         {
-            char[] lettersDescFreqOrder = charCounter.sortCharactersByCount(false);
-            char[] lettersAscFreqOrder = charCounter.sortCharactersByCount(true);
+            char[] lettersDescFreqOrder = charCounter.sortCharactersByCount(false, true);
+            char[] lettersAscFreqOrder = charCounter.sortCharactersByCount(true, true);
             messageCharsPuzzle1[messageIndex] = lettersDescFreqOrder[0];
             messageCharsPuzzle2[messageIndex] = lettersAscFreqOrder[0];
             messageIndex++;

@@ -26,20 +26,12 @@ public class CharacterCounter
         _characterCounts.put(pSomeCharacter, nbOccurrences + 1);
     }
 
-    public char[] sortCharactersByCount(boolean pAscendingOrder)
+    public char[] sortCharactersByCount(boolean pCountAscOrder, boolean pCharSameCountAscOrder)
     {
-        Comparator<Integer> charCountComparator;
-        Comparator<Character> charComparator;
-        if (pAscendingOrder)
-        {
-            charCountComparator = Comparator.naturalOrder();
-            charComparator = Comparator.naturalOrder();
-        }
-        else
-        {
-            charCountComparator = Comparator.reverseOrder();
-            charComparator = Comparator.reverseOrder();
-        }
+        Comparator<Integer> charCountComparator
+                = pCountAscOrder ? Comparator.naturalOrder() : Comparator.reverseOrder();
+        Comparator<Character> charComparator
+                = pCharSameCountAscOrder ? Comparator.naturalOrder() : Comparator.reverseOrder();
 
         ReverseCharCount rcc = new ReverseCharCount(
                 _characterCounts, charCountComparator, charComparator);
