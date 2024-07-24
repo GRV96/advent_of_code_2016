@@ -1,6 +1,6 @@
 package src.day4;
 
-import src.day4.char_count.CharacterCounter;
+import src.char_count.CharacterCounter;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

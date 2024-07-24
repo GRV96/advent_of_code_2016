@@ -1,4 +1,4 @@
-package src.day4.char_count;
+package src.char_count;
 
 import java.util.Comparator;
 import java.util.ArrayList;
