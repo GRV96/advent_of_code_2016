@@ -35,7 +35,7 @@ public class Day4
                 charCounter.registerCharacter(currentChar);
             }
         }
-        char[] descFreqSortedChars = charCounter.getCharsSortedByDescCount();
+        char[] descFreqSortedChars = charCounter.sortCharactersByCount(false);
 
         String generatedChecksum
                 = new String(descFreqSortedChars).substring(0, CHECKSUM_LENGTH);

@@ -47,15 +47,20 @@ public class Day6
             }
         }
 
-        char[] messageChars = new char[characterCounters.size()];
+        int nbCharCounters = characterCounters.size();
+        char[] messageCharsPuzzle1 = new char[nbCharCounters];
+        char[] messageCharsPuzzle2 = new char[nbCharCounters];
         int messageIndex = 0;
         for (CharacterCounter charCounter : characterCounters)
         {
-            char[] lettersDescFreqOrder = charCounter.getCharsSortedByDescCount();
-            messageChars[messageIndex] = lettersDescFreqOrder[0];
+            char[] lettersDescFreqOrder = charCounter.sortCharactersByCount(false);
+            char[] lettersAscFreqOrder = charCounter.sortCharactersByCount(true);
+            messageCharsPuzzle1[messageIndex] = lettersDescFreqOrder[0];
+            messageCharsPuzzle2[messageIndex] = lettersAscFreqOrder[0];
             messageIndex++;
         }
 
-        System.out.println("Puzzle 1: " + new String(messageChars));
+        System.out.println("Puzzle 1: " + new String(messageCharsPuzzle1));
+        System.out.println("Puzzle 2: " + new String(messageCharsPuzzle2));
     }
 }

@@ -1,5 +1,6 @@
 package src.char_count;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,23 @@ public class CharacterCounter
         _characterCounts.put(pSomeCharacter, nbOccurrences + 1);
     }
 
-    public char[] getCharsSortedByDescCount()
+    public char[] sortCharactersByCount(boolean pAscendingOrder)
     {
-        ReverseCharCount rcc = new ReverseCharCount(_characterCounts);
+        Comparator<Integer> charCountComparator;
+        Comparator<Character> charComparator;
+        if (pAscendingOrder)
+        {
+            charCountComparator = Comparator.naturalOrder();
+            charComparator = Comparator.naturalOrder();
+        }
+        else
+        {
+            charCountComparator = Comparator.reverseOrder();
+            charComparator = Comparator.reverseOrder();
+        }
+
+        ReverseCharCount rcc = new ReverseCharCount(
+                _characterCounts, charCountComparator, charComparator);
         List<Character> sortedCharacters = rcc.getCharsSortedByDescCount();
         int nbCharacters = sortedCharacters.size();
         char[] retVal = new char[nbCharacters];
