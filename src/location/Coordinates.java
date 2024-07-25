@@ -15,12 +15,6 @@ public class Coordinates
         y = pY;
     }
 
-    public Coordinates(Coordinates pOther)
-    {
-        x = pOther.x;
-        y = pOther.y;
-    }
-
     @Override
     public boolean equals(Object pObject)
     {

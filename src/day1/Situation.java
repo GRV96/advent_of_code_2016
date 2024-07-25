@@ -22,12 +22,6 @@ class Situation
         return _coordinates.toString() + ARROW + _orientation;
     }
 
-    public Situation(Situation pOther)
-    {
-        _coordinates = new Coordinates(pOther._coordinates);
-        _orientation = pOther._orientation;
-    }
-
     public int calculateManhattanDistance()
     {
         return _coordinates.calculateManhattanDistance();
