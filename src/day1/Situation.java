@@ -1,5 +1,8 @@
 package src.day1;
 
+import src.location.Coordinates;
+import src.location.Direction;
+
 class Situation
 {
     private static final String ARROW = " -> ";

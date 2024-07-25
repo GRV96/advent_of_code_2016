@@ -1,5 +1,7 @@
 package src.day1;
 
+import src.location.Coordinates;
+import src.location.Direction;
 import src.reading.PuzzleReading;
 
 import java.io.IOException;

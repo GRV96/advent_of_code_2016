@@ -1,4 +1,4 @@
-package src.day1;
+package src.location;
 
 public class Coordinates
 {
@@ -29,8 +29,7 @@ public class Coordinates
             return false;
         }
 
-        boolean areEqual = x == other.x && y == other.y;
-        return areEqual;
+        return x == other.x && y == other.y;
     }
 
     @Override
