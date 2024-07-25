@@ -1,6 +1,6 @@
 package src.day7;
 
-public class AbaPattern
+class AbaPattern
 {
     public static final int ABA_PATTERN_LENGTH = 3;
 
