@@ -1,5 +1,8 @@
 package src.day1;
 
+import src.location.Coordinates;
+import src.location.Direction;
+
 class Situation
 {
     private static final String ARROW = " -> ";
@@ -17,12 +20,6 @@ class Situation
     public String toString()
     {
         return _coordinates.toString() + ARROW + _orientation;
-    }
-
-    public Situation(Situation pOther)
-    {
-        _coordinates = new Coordinates(pOther._coordinates);
-        _orientation = pOther._orientation;
     }
 
     public int calculateManhattanDistance()

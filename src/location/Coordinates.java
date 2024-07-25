@@ -1,4 +1,4 @@
-package src.day1;
+package src.location;
 
 public class Coordinates
 {
@@ -6,19 +6,13 @@ public class Coordinates
     private static final String PARENTHESIS_OPEN = "(";
     private static final String PARENTHESIS_CLOSED = ")";
 
-    private int _x;
-    private int _y;
+    public final int x;
+    public final int y;
 
     public Coordinates(int pX, int pY)
     {
-        _x = pX;
-        _y = pY;
-    }
-
-    public Coordinates(Coordinates pOther)
-    {
-        _x = pOther._x;
-        _y = pOther._y;
+        x = pX;
+        y = pY;
     }
 
     @Override
@@ -29,43 +23,32 @@ public class Coordinates
             return false;
         }
 
-        boolean areEqual = _x == other._x && _y == other._y;
-        return areEqual;
+        return x == other.x && y == other.y;
     }
 
     @Override
     public int hashCode()
     {
         int hash = 7;
-        hash = 87 * hash + _x;
-        hash = 97 * hash + _y;
+        hash = 87 * hash + x;
+        hash = 97 * hash + y;
         return hash;
     }
 
     @Override
     public String toString()
     {
-        return PARENTHESIS_OPEN + _x + COMMA_SPACE + _y + PARENTHESIS_CLOSED;
+        return PARENTHESIS_OPEN + x + COMMA_SPACE + y + PARENTHESIS_CLOSED;
     }
 
     public int calculateManhattanDistance()
     {
-        return Math.abs(_x) + Math.abs(_y);
-    }
-
-    public int getX()
-    {
-        return _x;
-    }
-
-    public int getY()
-    {
-        return _y;
+        return Math.abs(x) + Math.abs(y);
     }
 
     public Coordinates move(int pDeltaX, int pDeltaY)
     {
-        return new Coordinates(_x + pDeltaX, _y + pDeltaY);
+        return new Coordinates(x + pDeltaX, y + pDeltaY);
     }
 
     public Coordinates move(Direction.CardinalDir pCardinalDir, int pDistance)
@@ -82,11 +65,11 @@ public class Coordinates
 
     public Coordinates moveX(int pDeltaX)
     {
-        return new Coordinates(_x + pDeltaX, _y);
+        return new Coordinates(x + pDeltaX, y);
     }
 
     public Coordinates moveY(int pDeltaY)
     {
-        return new Coordinates(_x, _y + pDeltaY);
+        return new Coordinates(x, y + pDeltaY);
     }
 }

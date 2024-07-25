@@ -1,6 +1,6 @@
-package src.day1;
+package src.location;
 
-class Direction
+public class Direction
 {
     public enum CardinalDir
     {

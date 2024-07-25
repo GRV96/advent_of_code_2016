@@ -1,5 +1,7 @@
 package src.day1;
 
+import src.location.Coordinates;
+import src.location.Direction;
 import src.reading.PuzzleReading;
 
 import java.io.IOException;
@@ -19,7 +21,7 @@ class Day1
         Situation situation = new Situation(0, 0, Direction.CardinalDir.NORTH);
         Coordinates firstCoordsVisitedTwice = null;
         Set<Coordinates> coordinateSet = new LinkedHashSet<>();
-        coordinateSet.add(new Coordinates(situation.getCoordinates()));
+        coordinateSet.add(situation.getCoordinates());
 
         for(String instruction : instructions)
         {
