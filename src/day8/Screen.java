@@ -37,9 +37,11 @@ class Screen
 
         for (int i=0; i<nbColumns; i++)
         {
+            boolean[] pixelColumn = _pixels[i];
+
             for (int j=0; j<nbRows; j++)
             {
-                if (_pixels[i][j])
+                if (pixelColumn[j])
                 {
                     nbPixelsOn++;
                 }
@@ -86,6 +88,7 @@ class Screen
 
     public boolean rotateColumn(int pColumnIndex, int pShift)
     {
+        pShift = pShift % nbRows;
         if (pShift <= 0 || !isColumnIndexValid(pColumnIndex))
         {
             return false;
@@ -113,6 +116,7 @@ class Screen
 
     public boolean rotateRow(int pRowIndex, int pShift)
     {
+        pShift = pShift % nbColumns;
         if (pShift <= 0 || !isRowIndexValid(pRowIndex))
         {
             return false;

@@ -56,4 +56,11 @@ class Day8
             case ROW -> pScreen.rotateRow(index, shift);
         }
     }
+
+    private static void printCommandAndResult(String pCommand, Screen pScreen)
+    {
+        System.out.println(pCommand);
+        pScreen.printPixels();
+        System.out.println();
+    }
 }
