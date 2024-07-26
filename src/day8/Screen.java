@@ -101,7 +101,7 @@ class Screen
             tmpMemory[j-tmpMemInitIndex] = _pixels[pColumnIndex][j];
         }
 
-        for (int j=pShift; j<nbRows; j++)
+        for (int j=nbRows-1; j>=pShift; j--)
         {
             _pixels[pColumnIndex][j] = _pixels[pColumnIndex][j-pShift];
         }
@@ -129,7 +129,7 @@ class Screen
             tmpMemory[i-tmpMemInitIndex] = _pixels[i][pRowIndex];
         }
 
-        for (int i=pShift; i<nbColumns; i++)
+        for (int i=nbColumns-1; i>=pShift; i--)
         {
             _pixels[i][pRowIndex] = _pixels[i-pShift][pRowIndex];
         }
