@@ -55,6 +55,8 @@ class Day8
         }
 
         System.out.println("Puzzle 1: " + screen.countPixelsOn());
+        System.out.println("Puzzle 2:");
+        screen.printPixels();
     }
 
     private static void printCommandAndResult(String pCommand, Screen pScreen)
