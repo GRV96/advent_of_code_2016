@@ -16,20 +16,25 @@ class Day9
 
         Pattern markerPattern = Pattern.compile("(\\(\\d+x\\d+\\))");
         Matcher markerMatcher = markerPattern.matcher(compressedContent);
-        markerMatcher.find();
 
         StringBuilder decompressedStrBuilder = new StringBuilder();
         int decompressionIndex = 0;
-        int nbGroups = markerMatcher.groupCount();
-        for (int groupIndex=0; groupIndex<nbGroups; groupIndex++)
+        int groupIndex = -1;
+        while (markerMatcher.find(decompressionIndex))
         {
-            int groupStart = markerMatcher.start(groupIndex);
-            int groupEnd = markerMatcher.end(groupIndex);
+            groupIndex++;
+            int groupStart = markerMatcher.start(0);
+            int groupEnd = markerMatcher.end(0);
+
+            if (groupStart < decompressionIndex)
+            {
+                continue;
+            }
 
             CompressionMarker compressionMarker = makeCompressionMarker(
                     compressedContent, groupStart, groupEnd);
-            int sequenceStart = groupStart + groupEnd - 1;
-            int sequenceEnd = sequenceStart + compressionMarker.sequenceLength;
+            // The sequence to repeat starts at index groupEnd.
+            int sequenceEnd = groupEnd + compressionMarker.sequenceLength;
 
             if (groupStart > decompressionIndex)
             {
@@ -38,7 +43,7 @@ class Day9
                 decompressedStrBuilder.append(nonCompressedSequence);
             }
 
-            String sequence = compressedContent.substring(sequenceStart, sequenceEnd);
+            String sequence = compressedContent.substring(groupEnd, sequenceEnd);
             decompressedStrBuilder.append(sequence.repeat(compressionMarker.nbRepetitions));
 
             decompressionIndex = sequenceEnd;
