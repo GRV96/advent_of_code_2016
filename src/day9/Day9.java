@@ -19,10 +19,8 @@ class Day9
 
         StringBuilder decompressedStrBuilder = new StringBuilder();
         int decompressionIndex = 0;
-        int groupIndex = -1;
         while (markerMatcher.find(decompressionIndex))
         {
-            groupIndex++;
             int groupStart = markerMatcher.start(0);
             int groupEnd = markerMatcher.end(0);
 
