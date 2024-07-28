@@ -17,7 +17,7 @@ class Day9
         Pattern markerPattern = Pattern.compile("(\\(\\d+x\\d+\\))");
         Matcher markerMatcher = markerPattern.matcher(compressedContent);
 
-        StringBuilder decompressedStrBuilder = new StringBuilder();
+        int decompressedStrLengthPuzzle1 = 0;
         int decompressionIndex = 0;
         while (markerMatcher.find(decompressionIndex))
         {
@@ -36,19 +36,15 @@ class Day9
 
             if (groupStart > decompressionIndex)
             {
-                String nonCompressedSequence =
-                        compressedContent.substring(decompressionIndex, groupStart);
-                decompressedStrBuilder.append(nonCompressedSequence);
+                decompressedStrLengthPuzzle1 += groupStart - decompressionIndex;
             }
 
-            String sequence = compressedContent.substring(groupEnd, sequenceEnd);
-            decompressedStrBuilder.append(sequence.repeat(compressionMarker.nbRepetitions));
+            decompressedStrLengthPuzzle1 += compressionMarker.nbRepetitions * (sequenceEnd - groupEnd);
 
             decompressionIndex = sequenceEnd;
         }
 
-        String decompressedContent = decompressedStrBuilder.toString();
-        System.out.println("Puzzle 1: " + decompressedContent.length());
+        System.out.println("Puzzle 1: " + decompressedStrLengthPuzzle1);
     }
 
     private static CompressionMarker makeCompressionMarker(
