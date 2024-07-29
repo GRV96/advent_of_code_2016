@@ -1,6 +1,6 @@
 package src.day4;
 
-public class RoomCode
+class RoomCode
 {
     public final String name;
     public final int sectorId;

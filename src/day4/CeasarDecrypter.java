@@ -3,7 +3,7 @@ package src.day4;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CeasarDecrypter
+class CeasarDecrypter
 {
     private Map<Integer, Map<Character, Character>> _decryptionTables;
 

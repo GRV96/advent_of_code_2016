@@ -1,6 +1,6 @@
 package src.day2;
 
-public class DiamondKeypad extends AKeypad
+class DiamondKeypad extends AKeypad
 {
     private static final char NULL_CHAR = '\0';
 

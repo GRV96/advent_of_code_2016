@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day4
+class Day4
 {
     private static final char DASH = '-';
     private static final char OPENING_BRACKET = '[';
