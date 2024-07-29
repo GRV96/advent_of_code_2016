@@ -8,17 +8,17 @@ import java.util.regex.Pattern;
 
 class Day9
 {
-    private static int calculatedDecompressedLength(
+    private static long calculatedDecompressedLength(
             String pCompressedContent, Matcher pMarkerMatcher)
     {
         return calculatedDecompressedLength(
                 pCompressedContent, pMarkerMatcher, 0, pCompressedContent.length());
     }
 
-    private static int calculatedDecompressedLength(
+    private static long calculatedDecompressedLength(
             String pCompressedContent, Matcher pMarkerMatcher, int pStartIndex, int pEndIndex)
     {
-        int decompressedLength = 0;
+        long decompressedLength = 0;
 
         int decompressionIndex = pStartIndex;
         while (pMarkerMatcher.find(decompressionIndex))
@@ -26,15 +26,15 @@ class Day9
             int groupStart = pMarkerMatcher.start(0);
             int groupEnd = pMarkerMatcher.end(0);
 
+            if (groupStart >= pEndIndex)
+            {
+                break;
+            }
+
             CompressionMarker compressionMarker = makeCompressionMarker(
                     pCompressedContent, groupStart, groupEnd);
             // The sequence to repeat starts at index groupEnd.
             int sequenceEnd = groupEnd + compressionMarker.sequenceLength;
-
-            if (groupStart > decompressionIndex)
-            {
-                decompressedLength += groupStart - decompressionIndex;
-            }
 
             decompressedLength += compressionMarker.nbRepetitions
                     * calculatedDecompressedLength(
@@ -45,7 +45,7 @@ class Day9
 
         if (decompressionIndex < pEndIndex)
         {
-            decompressedLength += pEndIndex - decompressedLength;
+            decompressedLength += pEndIndex - decompressionIndex;
         }
 
         return decompressedLength;
@@ -90,7 +90,7 @@ class Day9
 
         System.out.println("Puzzle 1: " + decompressedStrLengthPuzzle1);
 
-        int decompressedStrLengthPuzzle2 =
+        long decompressedStrLengthPuzzle2 =
                 calculatedDecompressedLength(compressedContent, markerMatcher);
         System.out.println("Puzzle 2: " + decompressedStrLengthPuzzle2);
     }
