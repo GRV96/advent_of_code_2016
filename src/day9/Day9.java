@@ -8,6 +8,49 @@ import java.util.regex.Pattern;
 
 class Day9
 {
+    private static int calculatedDecompressedLength(
+            String pCompressedContent, Matcher pMarkerMatcher)
+    {
+        return calculatedDecompressedLength(
+                pCompressedContent, pMarkerMatcher, 0, pCompressedContent.length());
+    }
+
+    private static int calculatedDecompressedLength(
+            String pCompressedContent, Matcher pMarkerMatcher, int pStartIndex, int pEndIndex)
+    {
+        int decompressedLength = 0;
+
+        int decompressionIndex = pStartIndex;
+        while (pMarkerMatcher.find(decompressionIndex))
+        {
+            int groupStart = pMarkerMatcher.start(0);
+            int groupEnd = pMarkerMatcher.end(0);
+
+            CompressionMarker compressionMarker = makeCompressionMarker(
+                    pCompressedContent, groupStart, groupEnd);
+            // The sequence to repeat starts at index groupEnd.
+            int sequenceEnd = groupEnd + compressionMarker.sequenceLength;
+
+            if (groupStart > decompressionIndex)
+            {
+                decompressedLength += groupStart - decompressionIndex;
+            }
+
+            decompressedLength += compressionMarker.nbRepetitions
+                    * calculatedDecompressedLength(
+                            pCompressedContent, pMarkerMatcher, groupEnd, sequenceEnd);
+
+            decompressionIndex = sequenceEnd;
+        }
+
+        if (decompressionIndex < pEndIndex)
+        {
+            decompressedLength += pEndIndex - decompressedLength;
+        }
+
+        return decompressedLength;
+    }
+
     public static void main(String[] pArgs) throws IOException
     {
         String inputPath = pArgs[0];
@@ -39,12 +82,17 @@ class Day9
                 decompressedStrLengthPuzzle1 += groupStart - decompressionIndex;
             }
 
-            decompressedStrLengthPuzzle1 += compressionMarker.nbRepetitions * (sequenceEnd - groupEnd);
+            decompressedStrLengthPuzzle1 +=
+                    compressionMarker.nbRepetitions * (sequenceEnd - groupEnd);
 
             decompressionIndex = sequenceEnd;
         }
 
+        int decompressedStrLengthPuzzle2 =
+                calculatedDecompressedLength(compressedContent, markerMatcher);
+
         System.out.println("Puzzle 1: " + decompressedStrLengthPuzzle1);
+        System.out.println("Puzzle 2: " + decompressedStrLengthPuzzle2);
     }
 
     private static CompressionMarker makeCompressionMarker(
