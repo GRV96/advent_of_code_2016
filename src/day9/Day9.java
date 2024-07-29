@@ -88,10 +88,10 @@ class Day9
             decompressionIndex = sequenceEnd;
         }
 
+        System.out.println("Puzzle 1: " + decompressedStrLengthPuzzle1);
+
         int decompressedStrLengthPuzzle2 =
                 calculatedDecompressedLength(compressedContent, markerMatcher);
-
-        System.out.println("Puzzle 1: " + decompressedStrLengthPuzzle1);
         System.out.println("Puzzle 2: " + decompressedStrLengthPuzzle2);
     }
 
